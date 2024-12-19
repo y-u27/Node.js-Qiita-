@@ -1,6 +1,14 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost:27017/ExpressAPI");
+mongoose.connection.on("error", function (err) {
+  console.error("MongoDB connection error: " + err);
+  process.exit(-1);
+});
 
 // body-parserの設定
 app.use(bodyParser.urlencoded({ extended: true }));
